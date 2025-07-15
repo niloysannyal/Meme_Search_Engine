@@ -19,15 +19,15 @@ st.sidebar.markdown(
 
 # Text Query Input
 st.sidebar.markdown("**📝 Query:**", unsafe_allow_html=True)
-query = st.sidebar.text_input("", "Exam", label_visibility="collapsed")
+query = st.sidebar.text_input("Search Query", "Exam", label_visibility="collapsed")
 
 # Sentiment Filter
 st.sidebar.markdown("**💬 Sentiment:**", unsafe_allow_html=True)
-sentiment = st.sidebar.selectbox("", ["Any", "Positive", "Neutral", "Negative"], label_visibility="collapsed")
+sentiment = st.sidebar.selectbox("Sentiment Filter", ["Any", "Positive", "Neutral", "Negative"], label_visibility="collapsed")
 
 # Top K Slider
 st.sidebar.markdown("**🔢 Top Results:**", unsafe_allow_html=True)
-top_k = st.sidebar.slider("", 1, 10, 5, label_visibility="collapsed")
+top_k = st.sidebar.slider("Top Results", 1, 10, 5, label_visibility="collapsed")
 
 # Upload Box
 st.sidebar.markdown("**📤 Upload an image:**", unsafe_allow_html=True)
