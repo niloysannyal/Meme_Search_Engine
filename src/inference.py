@@ -1,16 +1,16 @@
-# src/inference.py
-
 import torch
 import pandas as pd
 from PIL import Image, ImageFile
 import torch.nn.functional as F
 import clip
 from tqdm import tqdm
+import pickle
+from pathlib import Path
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 class MemeSearch:
-    def __init__(self, meme_paths, model_name, label_csv=None):
+    def __init__(self, meme_paths, model_name, label_csv=None, embedding_path=None):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model, self.preprocess = clip.load(model_name, device=self.device)
 
@@ -24,7 +24,18 @@ class MemeSearch:
             self.labels = dict(zip(df['image_name'], df['text_corrected']))
             self.sentiments = dict(zip(df['image_name'], df['overall_sentiment']))
 
-        self.embeddings, self.image_names = self._embed_images(meme_paths)
+        # Load embeddings if path given and exists
+        if embedding_path and Path(embedding_path).exists():
+            print(f"Loading embeddings from {embedding_path} ...")
+            with open(embedding_path, "rb") as f:
+                data = pickle.load(f)
+                self.embeddings = data["embeddings"].to(self.device)
+                self.image_names = data["filenames"]
+                # Optional: you could load sentiments from pickle if saved
+        else:
+            # Compute embeddings if no precomputed embeddings found
+            print("No embeddings file found, embedding images now...")
+            self.embeddings, self.image_names = self._embed_images(meme_paths)
 
     def _embed_images(self, paths):
         image_embeds = []
@@ -57,6 +68,9 @@ class MemeSearch:
                 print(f"Error processing {path.name}: {e}")
                 continue
 
+        if len(image_embeds) == 0:
+            raise ValueError("No images were successfully embedded!")
+
         return torch.cat(image_embeds), image_names
 
     def search(self, query, top_k=5, sentiment_filter="Any"):
@@ -66,7 +80,6 @@ class MemeSearch:
             text_feat = self.model.encode_text(text_input)
         text_feat = text_feat / text_feat.norm(dim=-1, keepdim=True)
 
-        # Compute cosine similarities
         results = []
         for i, img_emb in enumerate(self.embeddings):
             name = self.image_names[i]
@@ -76,7 +89,7 @@ class MemeSearch:
                 if self.sentiments.get(name, "").lower() != sentiment_filter.lower():
                     continue
 
-            sim = F.cosine_similarity(text_feat.cpu(), img_emb.unsqueeze(0).cpu(), dim=1)
+            sim = F.cosine_similarity(text_feat, img_emb.unsqueeze(0), dim=1)
             results.append((name, sim.item()))
 
         return sorted(results, key=lambda x: x[1], reverse=True)[:top_k]
@@ -92,7 +105,7 @@ class MemeSearch:
 
             results = []
             for i, img_emb in enumerate(self.embeddings):
-                sim = F.cosine_similarity(query_feat.cpu(), img_emb.unsqueeze(0).cpu(), dim=1)
+                sim = F.cosine_similarity(query_feat, img_emb.unsqueeze(0), dim=1)
                 results.append((self.image_names[i], sim.item()))
 
             return sorted(results, key=lambda x: x[1], reverse=True)[:top_k]

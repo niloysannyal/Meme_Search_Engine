@@ -19,15 +19,15 @@ st.sidebar.markdown(
 
 # Text Query Input
 st.sidebar.markdown("**📝 Query:**", unsafe_allow_html=True)
-query = st.sidebar.text_input("", "Exam", label_visibility="collapsed")
+query = st.sidebar.text_input("Search Query", "Exam", label_visibility="collapsed")
 
 # Sentiment Filter
 st.sidebar.markdown("**💬 Sentiment:**", unsafe_allow_html=True)
-sentiment = st.sidebar.selectbox("", ["Any", "Positive", "Neutral", "Negative"], label_visibility="collapsed")
+sentiment = st.sidebar.selectbox("Sentiment Filter", ["Any", "Positive", "Neutral", "Negative"], label_visibility="collapsed")
 
 # Top K Slider
 st.sidebar.markdown("**🔢 Top Results:**", unsafe_allow_html=True)
-top_k = st.sidebar.slider("", 1, 10, 5, label_visibility="collapsed")
+top_k = st.sidebar.slider("Top Results", 1, 10, 5, label_visibility="collapsed")
 
 # Upload Box
 st.sidebar.markdown("**📤 Upload an image:**", unsafe_allow_html=True)
@@ -45,9 +45,15 @@ st.sidebar.success(f"📁 {len(meme_paths)} memes loaded")
 # ---------------------- Load Model -------------------------
 @st.cache_resource
 def load_search_engine():
-    return MemeSearch(meme_paths, MODEL_NAME, label_csv=LABEL_CSV)
+    return MemeSearch(
+        meme_paths=meme_paths,
+        model_name=MODEL_NAME,
+        label_csv=LABEL_CSV,
+        embedding_path="Memes/embeddings.pkl"
+    )
 
 search_engine = load_search_engine()
+
 
 # ---------------------- Search -------------------------
 if uploaded_file:
