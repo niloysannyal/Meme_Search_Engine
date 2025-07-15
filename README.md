@@ -9,9 +9,14 @@ Built with **CLIP (Contrastive Language–Image Pre-training)**, **PyTorch**, an
 
 ## 🌐 Web App
 
-[![Live](https://img.shields.io/badge/LIVE-VISIT%20NOW-blue?style=for-the-badge&logo=streamlit)](https://memesearchengine.streamlit.app/)
 <p align="center">
   <img src="https://github.com/user-attachments/assets/1eafc01a-0704-4530-8ef8-8881f223f81c" alt="Meme Search Engine" width="1000" />
+</p>
+
+<p align="center">
+  <a href="https://memesearchengine.streamlit.app/">
+    <img src="https://img.shields.io/badge/LIVE-VISIT%20NOW-blue?style=for-the-badge&logo=streamlit" alt="Live">
+  </a>
 </p>
 
 
