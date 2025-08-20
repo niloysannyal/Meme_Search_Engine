@@ -9,7 +9,7 @@ import base64
 
 # ---------------------- Page Config -------------------------
 st.set_page_config(page_title="Meme Search Engine", page_icon="🎭", layout="wide")
-st.markdown("<h1 style='text-align: center;'>🔍 Meme Search Engine</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>🎭 Meme Search Engine</h1>", unsafe_allow_html=True)
 
 # ---------------------- Sidebar -------------------------
 st.sidebar.markdown(
