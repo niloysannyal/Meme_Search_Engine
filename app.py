@@ -88,8 +88,16 @@ for idx, (name, score) in enumerate(results):
 
 # ---------------------- Footer -------------------------
 st.markdown("---")
-st.markdown("""
-<div style='text-align: center; font-size: 14px;'>
-  Made with ❤️ by <b>Niloy Sannyal</b> | <a href='https://github.com/NiloySannyal' target='_blank'>GitHub</a>
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    """
+    <hr style="border:1px solid #444;">
+    <footer style="text-align: center; color: #B0B0B0; font-size: 14px; line-height: 1.6;">
+        🎭 Meme Search Engine &nbsp;&nbsp;|&nbsp;&nbsp;
+        Built by <b>Niloy Sannyal</b> <br>
+        Email: <a href="mailto:niloysannyal@gmail.com" style="color:#0000EE;">niloysannyal@gmail.com</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+        GitHub: <a href="https://github.com/niloysannyal" target="_blank" style="color:#0000EE;">github.com/niloysannyal</a> <br>
+        &copy; 2025 All rights reserved.
+    </footer>
+    """,
+    unsafe_allow_html=True,
+)
