@@ -8,7 +8,7 @@ from src.config import DATA_DIR, LABEL_CSV, MODEL_NAME, SENTIMENT_OPTIONS
 import base64
 
 # ---------------------- Page Config -------------------------
-st.set_page_config(page_title="Meme Search Engine", layout="wide")
+st.set_page_config(page_title="Meme Search Engine", page_icon="🎭", layout="wide")
 st.markdown("<h1 style='text-align: center;'>🔍 Meme Search Engine</h1>", unsafe_allow_html=True)
 
 # ---------------------- Sidebar -------------------------
