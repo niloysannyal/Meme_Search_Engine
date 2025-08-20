@@ -87,15 +87,14 @@ for idx, (name, score) in enumerate(results):
             st.markdown(href, unsafe_allow_html=True)
 
 # ---------------------- Footer -------------------------
-st.markdown("---")
 st.markdown(
     """
     <hr style="border:1px solid #444;">
     <footer style="text-align: center; color: #B0B0B0; font-size: 14px; line-height: 1.6;">
         🎭 Meme Search Engine &nbsp;&nbsp;|&nbsp;&nbsp;
         Built by <b>Niloy Sannyal</b> <br>
-        Email: <a href="mailto:niloysannyal@gmail.com" style="color:#0000EE;">niloysannyal@gmail.com</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-        GitHub: <a href="https://github.com/niloysannyal" target="_blank" style="color:#0000EE;">github.com/niloysannyal</a> <br>
+        Email: <a href="mailto:niloysannyal@gmail.com">niloysannyal@gmail.com</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+        GitHub: <a href="https://github.com/niloysannyal" target="_blank">github.com/niloysannyal</a> <br>
         &copy; 2025 All rights reserved.
     </footer>
     """,
